@@ -5,10 +5,10 @@ import java.sql.*;
 
 
 public class DataBase {
-
+    Connection connection = null;
 
     public DataBase(){
-        Connection connection = null;
+
         try {
             Class.forName("org.sqlite.JDBC");
 
@@ -27,20 +27,12 @@ public class DataBase {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            closeDataBase();
         }
     }
 
     public void insertData(String name, String email){
 
-        Connection connection = null;
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
@@ -59,19 +51,11 @@ public class DataBase {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            closeDataBase();
         }
     }
 
     public void selectData(){
-        Connection connection = null;
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
@@ -92,19 +76,11 @@ public class DataBase {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            closeDataBase();
         }
     }
 
     public void updateData(String email, int id){
-        Connection connection = null;
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
@@ -123,19 +99,11 @@ public class DataBase {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            closeDataBase();
         }
     }
 
     public void deleteData(int id){
-        Connection connection = null;
         try {
             // Load the SQLite JDBC driver
             Class.forName("org.sqlite.JDBC");
@@ -153,14 +121,17 @@ public class DataBase {
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            closeDataBase();
+        }
+    }
+
+    public void closeDataBase(){
+        try {
+            if (connection != null) {
+                connection.close();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
