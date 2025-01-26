@@ -34,12 +34,6 @@ public class DataBase {
     public void insertData(String name, String email){
 
         try {
-            // Load the SQLite JDBC driver
-            Class.forName("org.sqlite.JDBC");
-
-            // Create a connection to the database
-            connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
-
             // Insert data
             String sql = "INSERT INTO users (name, email) VALUES (?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -49,7 +43,7 @@ public class DataBase {
 
             System.out.println("Data inserted successfully");
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             closeDataBase();
         }
@@ -57,13 +51,7 @@ public class DataBase {
 
     public void selectData(){
         try {
-            // Load the SQLite JDBC driver
-            Class.forName("org.sqlite.JDBC");
 
-            // Create a connection to the database
-            connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
-
-            // Query data
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
 
@@ -74,7 +62,7 @@ public class DataBase {
                 System.out.println("ID: " + id + ", Name: " + name + ", Email: " + email);
             }
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             closeDataBase();
         }
@@ -82,11 +70,6 @@ public class DataBase {
 
     public void updateData(String email, int id){
         try {
-            // Load the SQLite JDBC driver
-            Class.forName("org.sqlite.JDBC");
-
-            // Create a connection to the database
-            connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
 
             // Update data
             String sql = "UPDATE users SET email = ? WHERE id = ?";
@@ -97,7 +80,7 @@ public class DataBase {
 
             System.out.println("Data updated successfully");
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             closeDataBase();
         }
@@ -105,12 +88,6 @@ public class DataBase {
 
     public void deleteData(int id){
         try {
-            // Load the SQLite JDBC driver
-            Class.forName("org.sqlite.JDBC");
-
-            // Create a connection to the database
-            connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
-
             // Delete data
             String sql = "DELETE FROM users WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -119,7 +96,7 @@ public class DataBase {
 
             System.out.println("Data deleted successfully");
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             closeDataBase();
         }
