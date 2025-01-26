@@ -10,7 +10,7 @@ This is a simple project to show how use sqlite in java. It has simple methods l
 > Delete Data
 
 
-### How to run?
+## How to run?
 > Go to DataBase/src/main/java/org/example
 
 > write that methods you want to use
